@@ -201,6 +201,12 @@ function makeBarCodeImage(isbn, cvs) {
     var data = bw.bitmap().makeImageData(scl, isbn, cvs && cvs[0], 'N');
     // console.log(scl, data.w, data.h);
 
+    try {
+        if (data && data.data && ga) {
+          ga('send', 'event', 'tools/isbn-bar', 'generate', isbn);
+        }
+    } catch (ex) {}
+
     return data && data.data || null;
 }
 
