@@ -41,14 +41,16 @@ AppBarCode.controller('CustIsbnCtrl', function($scope, $timeout) {
     $scope.isbn = $scope.defaultISBN = '978-7-122-18010-0';
 
     $scope.$watch('isbn', function(isbn) {
-        isbn = fixIsbn(isbn);
+        $timeout(function() {
+            isbn = fixIsbn(isbn);
 
-        if (! isbn) {
-            $scope.imgdata = null;
-            return;
-        }
+            if (! isbn) {
+                $scope.imgdata = null;
+                return;
+            }
 
-        $scope.imgdata = makeBarCodeImage(isbn);
+            $scope.imgdata = makeBarCodeImage(isbn);
+        });
     });
 });
 
@@ -66,7 +68,7 @@ AppBarCode.directive('isbnBar', function($parse, $timeout) {
 
             scope.isbn = isbn;
             var cc = $timeout(function() {
-                // scope.imgdata = makeBarCodeImage(isbn);
+                scope.imgdata = makeBarCodeImage(isbn);
             }, 0);
             scope.$on('$destroy', function() {
                 $timeout.cancel(cc);
@@ -74,6 +76,8 @@ AppBarCode.directive('isbnBar', function($parse, $timeout) {
         }
     };
 });
+
+/* used by bwip-js {{{ */
 
 // Encapsulate the bitmap interface
 function Bitmap() {
@@ -195,10 +199,12 @@ function makeBarCodeImage(isbn, cvs) {
     bw.call('isbn');
 
     var data = bw.bitmap().makeImageData(scl, isbn, cvs && cvs[0], 'N');
-    console.log(scl, data.w, data.h);
+    // console.log(scl, data.w, data.h);
 
-    return data.data;
+    return data && data.data || null;
 }
 
 function render() {
 }
+
+/* }}} */
