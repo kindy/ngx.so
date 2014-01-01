@@ -1,0 +1,82 @@
+看了下豌豆荚的网站，记录下随笔。
+Fri Jul 20 14:39:47 CST 2012
+
+$ dig -t NS wandoujia.com
+> wandoujia.com.      38158   IN  NS  ns1.dnsv2.com.
+> wandoujia.com.      38158   IN  NS  ns2.dnsv2.com.
+
+看来 dnspod 已经深入人心啦
+
+$ dig -t A wandoujia.com
+> wandoujia.com.      434 IN  A   60.28.205.73
+$ dig -t A www.wandoujia.com
+> www.wandoujia.com.    452 IN  A   60.28.205.73
+$ dig -t MX wandoujia.com
+> wandoujia.com.      600 IN  MX  10 aspmx2.googlemail.com.
+
+看来根域名和 www 域名都绑定了同一个host。
+使用 google app 来作邮箱服务。
+
+$ curl -sv 'http://www.wandoujia.com/'
+< HTTP/1.1 302 Moved Temporarily
+< Server: nginx/0.8.54
+< Connection: keep-alive
+< Location: http://m.wandoujia.com
+
+看来对 UA 做了判断，不愧是做手机应用的。
+
+$ curl -sv -A'msie' https://www.wandoujia.com/
+
+模拟下ie吧，这样就返回正常的内容了。
+
+ssl 证书是 rapidssl 的，只买了1年呀，8月底就到期啦，记得续费哦。
+
+< X-Powered-By: PHP/5.3.8
+< Set-Cookie: wd_uid=bc80f261d7eebc4e8469d24fe913e9c8; expires=Sun, 17-Jul-2022 15:46:07 GMT
+< Set-Cookie: wd_uid=4188b7cd6f1a3ab94dde27b029d8db12; expires=Sun, 17-Jul-2022 15:46:07 GMT
+
+响应中有这些，看来是 php 呀。只是为啥总见到 xx_uid , xx_sid 之类会重复呢？
+
+页面使用 html5 文档声明，不过编码声明比 移动版本的要啰嗦，为了更好的兼容性？
+> <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+
+好吧， 有自闭合的 <link 标签，相信应该不是前端所为(某web开发搞的吧)。
+还有就是，虽然支持 https ，不过内容却没有特别处理，资源引用上仍然使用了 http ，导致浏览器报告页面不安全。
+白白浪费了 https 给用户带来的安全感。
+
+静态资源使用了独立的域名 wdjimg.com 解析使用了 免费版的 dnspod (为啥?)。
+实际使用的 s.wdjimg.com 绑定了 chinacache 的 cdn，
+貌似页面中还有 static.wandoujia.com 的内容，也是用 chinacache 的加速服务，为啥要搞两套呢。
+呃，还有 img.wdjimg.com 。看来加速场景很多呀。
+呃，貌似还有 img.wandoujia.com ，实在很丰富呀。
+
+css 引用中有 http://s.wdjimg.com/style/min/g=webc/pack%7Cwebc/home%7C071301.css 样的，
+貌似跟 taobaocdn 的 combo 是一个功能，合并文件，看起来应该是 cdn 提供的功能。
+最后的 071301 应该时间戳，貌似比 combo 灵活些。
+
+页面中的 <script 标签形式用得相当丰富，
+最长的是 <script type="text/javascript" charset="utf-8"> (用在了 inline script 上，应该又是某web开发弄的吧)
+最短的是 <script>
+
+手机版有对各个链接添加事件记录 (ga) ，普通版没有(看来做手机版的同学相当专业呀)。
+不过，手机版中，貌似可以考虑提前 _gaq 的声明，这样就不用写
+onclick="(_gaq||[]).push(['_trackEvent', 'download', 'phoenix2', 'm'])"
+这样的代码了，意义不大，如果用户提前点击，还是会报错。或者写成
+onclick="window._gaq&&_gaq.push(['_trackEvent', 'download', 'phoenix2', 'm'])"
+同时手机版合并了许多图片到页面上，是为了尽可能减少 http 请求数吧。
+
+一开始看 award.wandoujia.com 的源码，还以为被压缩了，细看才发现用了 \r 换行，
+难道是在 mac 上开发的页面？或者被优化器把 \n 弄没了？总之很奇怪就是了。
+
+继续逛逛，貌似还有其他几个页面，比如 s, d, alpha 之类的子域，应用都相当简单。
+又发现新域名 wandou.im ，看来联合创始人很喜欢折腾 (在 name.com 买的呀，我喜欢)。
+貌似所有域名都在 王同学 名下，看来是事实上的 CTO 了。
+主域名是在 godaddy 上买的，估计后来嫌国内访问太慢，就都改 name.com 了吧。
+
+
+- - - - - - - -
+后记: 作为合格的程序员，应该把分析变成自动化的，可以自动的用指定的 url 输出以上内容才好。
+等得空吧。
+
+__END__
+

@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>~/h/github/kindy/ngx.so/htmls/misc/2012-07/wandoujia-web.txt.html</title>
+<meta name="Generator" content="Vim/7.3">
+<meta name="plugin-version" content="vim7.3_v6">
+<meta name="syntax" content="none">
+<meta name="settings" content="use_css,number_lines">
+<style type="text/css">
+<!--
+pre { font-family: monospace; color: #ffffff; background-color: #000000; }
+body { font-family: monospace; color: #ffffff; background-color: #000000; }
+.lnr { color: #00ff00; background-color: #000000; }
+-->
+</style>
+</head>
+<body>
+<pre>
+<span class="lnr"> 1 </span>看了下豌豆荚的网站，记录下随笔。
+<span class="lnr"> 2 </span>Fri Jul 20 14:39:47 CST 2012
+<span class="lnr"> 3 </span>
+<span class="lnr"> 4 </span>$ dig -t NS wandoujia.com
+<span class="lnr"> 5 </span>&gt; wandoujia.com.      38158   IN  NS  ns1.dnsv2.com.
+<span class="lnr"> 6 </span>&gt; wandoujia.com.      38158   IN  NS  ns2.dnsv2.com.
+<span class="lnr"> 7 </span>
+<span class="lnr"> 8 </span>看来 dnspod 已经深入人心啦
+<span class="lnr"> 9 </span>
+<span class="lnr">10 </span>$ dig -t A wandoujia.com
+<span class="lnr">11 </span>&gt; wandoujia.com.      434 IN  A   60.28.205.73
+<span class="lnr">12 </span>$ dig -t A www.wandoujia.com
+<span class="lnr">13 </span>&gt; www.wandoujia.com.    452 IN  A   60.28.205.73
+<span class="lnr">14 </span>$ dig -t MX wandoujia.com
+<span class="lnr">15 </span>&gt; wandoujia.com.      600 IN  MX  10 aspmx2.googlemail.com.
+<span class="lnr">16 </span>
+<span class="lnr">17 </span>看来根域名和 www 域名都绑定了同一个host。
+<span class="lnr">18 </span>使用 google app 来作邮箱服务。
+<span class="lnr">19 </span>
+<span class="lnr">20 </span>$ curl -sv '<a href="http://www.wandoujia.com/">http://www.wandoujia.com/</a>'
+<span class="lnr">21 </span>&lt; HTTP/1.1 302 Moved Temporarily^M
+<span class="lnr">22 </span>&lt; Server: nginx/0.8.54^M
+<span class="lnr">23 </span>&lt; Connection: keep-alive^M
+<span class="lnr">24 </span>&lt; Location: <a href="http://m.wandoujia.com^M">http://m.wandoujia.com^M</a>
+<span class="lnr">25 </span>
+<span class="lnr">26 </span>看来对 UA 做了判断，不愧是做手机应用的。
+<span class="lnr">27 </span>
+<span class="lnr">28 </span>$ curl -sv -A'msie' <a href="https://www.wandoujia.com/">https://www.wandoujia.com/</a>
+<span class="lnr">29 </span>
+<span class="lnr">30 </span>模拟下ie吧，这样就返回正常的内容了。
+<span class="lnr">31 </span>
+<span class="lnr">32 </span>ssl 证书是 rapidssl 的，只买了1年呀，8月底就到期啦，记得续费哦。
+<span class="lnr">33 </span>
+<span class="lnr">34 </span>&lt; X-Powered-By: PHP/5.3.8^M
+<span class="lnr">35 </span>&lt; Set-Cookie: wd_uid=bc80f261d7eebc4e8469d24fe913e9c8; expires=Sun, 17-Jul-2022 15:46:07 GMT^M
+<span class="lnr">36 </span>&lt; Set-Cookie: wd_uid=4188b7cd6f1a3ab94dde27b029d8db12; expires=Sun, 17-Jul-2022 15:46:07 GMT^M
+<span class="lnr">37 </span>
+<span class="lnr">38 </span>响应中有这些，看来是 php 呀。只是为啥总见到 xx_uid , xx_sid 之类会重复呢？
+<span class="lnr">39 </span>
+<span class="lnr">40 </span>页面使用 html5 文档声明，不过编码声明比 移动版本的要啰嗦，为了更好的兼容性？
+<span class="lnr">41 </span>&gt; &lt;meta content=&quot;text/html; charset=UTF-8&quot; http-equiv=&quot;content-type&quot;&gt;
+<span class="lnr">42 </span>
+<span class="lnr">43 </span>好吧， 有自闭合的 &lt;link 标签，相信应该不是前端所为(某web开发搞的吧)。
+<span class="lnr">44 </span>还有就是，虽然支持 https ，不过内容却没有特别处理，资源引用上仍然使用了 http ，导致浏览器报告页面不安全。
+<span class="lnr">45 </span>白白浪费了 https 给用户带来的安全感。
+<span class="lnr">46 </span>
+<span class="lnr">47 </span>静态资源使用了独立的域名 wdjimg.com 解析使用了 免费版的 dnspod (为啥?)。
+<span class="lnr">48 </span>实际使用的 s.wdjimg.com 绑定了 chinacache 的 cdn，
+<span class="lnr">49 </span>貌似页面中还有 static.wandoujia.com 的内容，也是用 chinacache 的加速服务，为啥要搞两套呢。
+<span class="lnr">50 </span>呃，还有 img.wdjimg.com 。看来加速场景很多呀。
+<span class="lnr">51 </span>呃，貌似还有 img.wandoujia.com ，实在很丰富呀。
+<span class="lnr">52 </span>
+<span class="lnr">53 </span>css 引用中有 <a href="http://s.wdjimg.com/style/min/g=webc/pack%7Cwebc/home%7C071301.css">http://s.wdjimg.com/style/min/g=webc/pack%7Cwebc/home%7C071301.css</a> 样的，
+<span class="lnr">54 </span>貌似跟 taobaocdn 的 combo 是一个功能，合并文件，看起来应该是 cdn 提供的功能。
+<span class="lnr">55 </span>最后的 071301 应该时间戳，貌似比 combo 灵活些。
+<span class="lnr">56 </span>
+<span class="lnr">57 </span>页面中的 &lt;script 标签形式用得相当丰富，
+<span class="lnr">58 </span>最长的是 &lt;script type=&quot;text/javascript&quot; charset=&quot;utf-8&quot;&gt; (用在了 inline script 上，应该又是某web开发弄的吧)
+<span class="lnr">59 </span>最短的是 &lt;script&gt;
+<span class="lnr">60 </span>
+<span class="lnr">61 </span>手机版有对各个链接添加事件记录 (ga) ，普通版没有(看来做手机版的同学相当专业呀)。
+<span class="lnr">62 </span>不过，手机版中，貌似可以考虑提前 _gaq 的声明，这样就不用写
+<span class="lnr">63 </span>onclick=&quot;(_gaq||[]).push(['_trackEvent', 'download', 'phoenix2', 'm'])&quot;
+<span class="lnr">64 </span>这样的代码了，意义不大，如果用户提前点击，还是会报错。或者写成
+<span class="lnr">65 </span>onclick=&quot;window._gaq&amp;&amp;_gaq.push(['_trackEvent', 'download', 'phoenix2', 'm'])&quot;
+<span class="lnr">66 </span>同时手机版合并了许多图片到页面上，是为了尽可能减少 http 请求数吧。
+<span class="lnr">67 </span>
+<span class="lnr">68 </span>一开始看 award.wandoujia.com 的源码，还以为被压缩了，细看才发现用了 \r 换行，
+<span class="lnr">69 </span>难道是在 mac 上开发的页面？或者被优化器把 \n 弄没了？总之很奇怪就是了。
+<span class="lnr">70 </span>
+<span class="lnr">71 </span>继续逛逛，貌似还有其他几个页面，比如 s, d, alpha 之类的子域，应用都相当简单。
+<span class="lnr">72 </span>又发现新域名 wandou.im ，看来联合创始人很喜欢折腾 (在 name.com 买的呀，我喜欢)。
+<span class="lnr">73 </span>貌似所有域名都在 王同学 名下，看来是事实上的 CTO 了。
+<span class="lnr">74 </span>主域名是在 godaddy 上买的，估计后来嫌国内访问太慢，就都改 name.com 了吧。
+<span class="lnr">75 </span>
+<span class="lnr">76 </span>
+<span class="lnr">77 </span>- - - - - - - -
+<span class="lnr">78 </span>后记: 作为合格的程序员，应该把分析变成自动化的，可以自动的用指定的 url 输出以上内容才好。
+<span class="lnr">79 </span>等得空吧。
+<span class="lnr">80 </span>
+<span class="lnr">81 </span>__END__
+<span class="lnr">82 </span>
+</pre>
+</body>
+</html>
