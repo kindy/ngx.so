@@ -23,6 +23,10 @@
     }
   </style>
   <script src="/s/lib/less-v1.5.1/less.min.js"></script>
+
+  <script src="/s/lib/jq-v1.10.2/jquery-1.10.2.js"></script>
+  <script src="/s/lib/bs-v3.0.0/js/bootstrap.js"></script>
+  <script src="/s/lib/ng-v1.2.4/angular.js"></script>
 </head>
 
 <body ng-app="AppBarCode">
@@ -70,7 +74,7 @@
         <div class="panel panel-default">
           <div class="panel-heading">ISBN Bar 生成器</div>
           <div class="panel-body">
-            <div ng-controller="CustIsbnCtrl">
+            <div ng-controller="CustIsbnCtrl" class="ng-cloak">
               <b>ISBN:</b>
               <input type="text" ng-model="isbn" ng-attr-placeholder="{{ defaultISBN }}">
               <a ng-show="isbn" ng-click="isbn=''" title="Clear" href="">x</a>
@@ -98,10 +102,6 @@
   </div> <!-- /container -->
 
 
-  <script src="/s/lib/jq-v1.10.2/jquery-1.10.2.js"></script>
-  <script src="/s/lib/bs-v3.0.0/js/bootstrap.js"></script>
-  <script src="/s/lib/d3-v3.3.13/d3.js"></script>
-  <script src="/s/lib/ng-v1.2.4/angular.js"></script>
   <script src="/s/lib/bwip-v0.5/bwip.js"></script>
 
   <script>
