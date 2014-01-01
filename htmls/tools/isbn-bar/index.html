@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>ISBN Bar</title>
+  <link type="text/css" rel="stylesheet" href="/s/lib/bs-v3.0.0/css/bootstrap.css" >
+  <style type="text/less" rel="stylesheet">
+    body {
+      padding-top: 70px;
+    }
+    .book-pag {
+      td {
+        text-align: right;
+      }
+
+      .pagination {
+        margin: 0;
+      }
+    }
+
+    .isbnshow {
+      padding: 10px;
+    }
+  </style>
+  <script src="/s/lib/less-v1.5.1/less.min.js"></script>
+</head>
+
+<body ng-app="AppBarCode">
+
+  <!-- Fixed navbar -->
+  <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Ngx.so - Tools</a>
+      </div>
+
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="/tools/isbn-bar/">ISBN Bar</a></li>
+          <li><a href="/tools/color/">Color</a></li>
+          <li class="dropdown" style="display: none;">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">More <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">More 1</a></li>
+              <li class="divider"></li>
+              <li class="dropdown-header">h</li>
+              <li><a href="#">More 2</a></li>
+            </ul>
+          </li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/s/">s</a></li>
+          <li><a href="https://github.com/kindy">My Github</a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
+
+  <div class="container">
+
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">ISBN Bar 生成器</div>
+          <div class="panel-body">
+            <div ng-controller="CustIsbnCtrl">
+              <b>ISBN:</b>
+              <input type="text" ng-model="isbn" ng-attr-placeholder="{{ defaultISBN }}">
+              <a ng-show="isbn" ng-click="isbn=''" title="Clear" href="">x</a>
+              <a ng-show="!isbn" ng-click="isbn=defaultISBN" href="">see see</a>
+              <br>
+              <div class="isbnshow" ng-show="imgdata">
+                <span><img ng-src="{{ imgdata }}" width="160"></span>
+
+                <div>
+                  <hr>
+                  Search In:
+                  <a target="_blank" ng-href="http://www.amazon.cn/s/?field-keywords={{isbn}}">Amazon CN</a>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-8">
+      </div>
+    </div>
+
+  </div> <!-- /container -->
+
+
+  <script src="/s/lib/jq-v1.10.2/jquery-1.10.2.js"></script>
+  <script src="/s/lib/bs-v3.0.0/js/bootstrap.js"></script>
+  <script src="/s/lib/d3-v3.3.13/d3.js"></script>
+  <script src="/s/lib/ng-v1.2.4/angular.js"></script>
+  <script src="/s/lib/bwip-v0.5/bwip.js"></script>
+
+  <script>
+(function() {
+  BWIPJS.load = function(path) {};
+
+  var pp = '/s/lib/bwip-v0.5/';
+
+  function emit(s) {
+    var src  = pp + s + '.js';
+
+    document.write('\x3cscript src="' + src + '">\x3c/script>');
+  }
+
+  // Renderers
+  emit('bwipp/renlinear');
+  emit('bwipp/renmatrix');
+  emit('bwipp/renmaximatrix');
+  emit('bwipp/ean2');
+  emit('bwipp/ean5');
+  emit('bwipp/ean13');
+  emit('bwipp/isbn');
+
+  // Fonts
+  for (var x = 1; x <= 10; x++) {
+    emit('fonts/ocrb10-' + (x < 10 ? '0' : '') + x);
+    emit('fonts/ocrb12-' + (x < 10 ? '0' : '') + x);
+  }
+})();
+  </script>
+
+  <script src="main.js"></script>
+</body>
+</html>
